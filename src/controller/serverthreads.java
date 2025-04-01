@@ -2,7 +2,7 @@ package controller;
 import java.util.concurrent.Semaphore;
 import java.util.Random;
 
-class serverthreads extends Thread{
+public class serverthreads extends Thread{
 	private static final Semaphore semaforo = new Semaphore(1); // apenas uma thread acessa obd por vez
 	private final int id;
 	
@@ -10,8 +10,11 @@ class serverthreads extends Thread{
 		this.id = id;
 	}
 	
+
 	private void calculo(long min, long max) throws InterruptedException{
-		long time = min + Random.nextInt((int) (max - min +1)); // gerando num aleatorio entre min e maximo
+		
+	Random random = new Random();
+		long time = min + random.nextInt((int) (max - min +1)); // gerando num aleatorio entre min e maximo
 		System.out.println("thread " + id + " realizando cálculos por " + time + "ms");
 		Thread.sleep(time);
 	}
@@ -48,5 +51,6 @@ class serverthreads extends Thread{
 			System.out.println("Thread " + id + " finalizou.");
 		}catch(InterruptedException e) {
 		Thread.currentThread().interrupt();
+		}
 	}
 }
